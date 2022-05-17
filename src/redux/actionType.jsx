@@ -1,0 +1,20 @@
+// PRODUCTS
+export const GET_PRODUCTS = "GET_PRODUCTS";
+export const GET_SINGLE_PRODUCT = "GET_SINGLE_PRODUCT";
+
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+ export const CLEAR_ITEMS = "CLEAR_ITEMS";
+export const INCREASE = "INCREASE";
+export const DECREASE = "DECREASE";
+export const UPDATE_CART_UNITS = "UPDATE_CART_UNITS";
+
+
+export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+export const SIGNUP_FAILED = "SIGNUP_FAILED";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILED = "LOGIN_FAILED";
+export const LOGOUT = "LOGOUT";
+export const SET_MESSAGE = "SET_MESSAGE";
+export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
+
