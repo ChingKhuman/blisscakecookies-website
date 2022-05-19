@@ -3038,13 +3038,13 @@ blockquote cite{
 .header-nav .nav > li > a {
 	border-radius: 0px;
     color: #2b2d2e;
-    font-size: 18px;
+    font-size: 20px;
     padding: 42px 12px 38px 12px;
     cursor: pointer;
     font-weight: 700;
     line-height: 20px;
     display: inline-block;
-    font-family: roboto;
+    font-family: 'Roboto', sans-serif!important;
     text-transform: capitalize;
 }
 .header-nav .nav > li > a:hover {
@@ -3272,7 +3272,7 @@ blockquote cite{
 .header-nav .nav > li.menu-item-has-children:before {
     content: "\f078";
     display: block;
-    font-family: "FontAwesome";
+    font-family: 'Roboto', sans-serif!important;
     right: 4px;
     position: absolute;
     top: 50%;

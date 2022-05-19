@@ -1,10 +1,15 @@
 import { combineReducers } from "redux";
-import { CartReducer } from "./CartReducer";
+//import { CartReducer } from "../reducer/CartReducer";
 import { ProductReducer } from "./ProductReducer";
  import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 import {AuthReducer, authReducer}  from "./AuthReducer";
 import messageReducer from "./messageReducer";
+//import CartReducer from './CartReducer'
+import CartReducer from "./CartReducer";
+
+
+
 
 
 const persistConfig = {

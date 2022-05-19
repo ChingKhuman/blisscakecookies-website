@@ -3,7 +3,7 @@ body, html {
 }
 body {
     background-color: #fff;
-	font-family: 'Poppins', sans-serif!important;
+	font-family: 'Roboto', sans-serif!important;
     font-size: 16px;
     font-weight: 400;
     color: #0a0a0a;
@@ -54,6 +54,7 @@ menu,
 nav,
 summary {
     display: block;
+   
 }
 address {
     font-style: italic;
@@ -128,7 +129,7 @@ h4,
 h5,
 h6 {
     color: #282828;
-	font-family: 'Amita', sans-serif!important;
+	
 }
 h1 a,
 h2 a,
@@ -2928,7 +2929,7 @@ blockquote cite{
     font-weight: 700;
     line-height: 20px;
     display: inline-block;
-    font-family: roboto;
+    font-family: "roboto"!important;
     text-transform: capitalize;
 }
 .header-nav .nav > li > a:hover {

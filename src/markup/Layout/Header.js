@@ -53,7 +53,11 @@ function Header(props) {
         <div className="main-bar clearfix ">
           <div className="container clearfix">
             <div className="logo-header mostion">
-              <Link to={"/Shop"} className="dez-page">
+              <Link
+                to={"/Shop"}
+                className="dez-page"
+                style={{ align: "center" }}
+              >
                 <img src={require("./../../images/logo9.1.png")} alt="" />
               </Link>
             </div>

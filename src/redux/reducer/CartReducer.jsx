@@ -93,3 +93,5 @@ export const CartReducer = (state = CART_INITIAL_STATE, action) => {
       return state;
   }
 };
+
+export default CartReducer;
