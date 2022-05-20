@@ -172,7 +172,7 @@ const Shopproduct = () => {
                       <button
                         onClick={() => {
                           //               console.log("add to cart", 1);
-                          dispatch(addToCart(product, 5));
+                          dispatch(addToCart(product, 1));
                         }}
                         className="btn btnhover"
                       >
