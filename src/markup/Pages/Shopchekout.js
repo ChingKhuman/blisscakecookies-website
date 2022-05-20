@@ -2,7 +2,6 @@ import React, { Component, useMemo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
-import swal from "sweetalert";
 
 import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
