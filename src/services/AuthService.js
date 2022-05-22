@@ -8,7 +8,7 @@ export function signUp(email, password) {
     password,
     token: true,
   };
-  return axios.post("https://cakes.manipur.ml/api/register/", data);
+  return axios.post("http://172.105.36.218:8011/api/register/", data);
 }
 
 export function login(email, password) {
@@ -17,7 +17,7 @@ export function login(email, password) {
     password,
     token: true,
   };
-  return axios.post("https://cakes.manipur.ml/api/login/", data);
+  return axios.post("http://172.105.36.218:8011/api/login/", data);
 }
 
 export function formatError(errorResponse) {

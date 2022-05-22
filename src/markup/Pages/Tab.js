@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useMemo } from "react";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
-import { loadProducts } from "../../redux/action/ProductAction";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { addToCart } from "../../redux/action/CartAction";
-import Index1 from "../Pages/Index1";
+import axios from "axios";
 
 const Popupss = () => {
   const [activeTab, setActiveTab] = useState(1);
+
+  const [categories, setCategories] = useState([]);
+  const [catbyProducts, setCatbyProducts] = useState([]);
 
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -16,128 +19,161 @@ const Popupss = () => {
 
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.product.products);
-  const { products, loading, error } = productList;
 
+  /*
   const filteredProductList = useMemo(() => {
     return productList.filter((p) => p.category.id === activeTab);
   }, [productList, activeTab]);
 
   useEffect(() => {
     dispatch(loadProducts());
-  }, []);
+  }, []);*/
+  useEffect(() => {
+    let headConfig = {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    };
+    //  const res = await axios.get()
+    axios
+      .get("http://172.105.36.218:8011/api/category/", headConfig)
+      .then((response) => {
+        console.log("response --- " + JSON.stringify(response.data));
+        setCategories(response.data);
+        getProducts(1);
+      })
+      .catch((e) => {
+        console.log("error ===== " + JSON.stringify(e));
+      });
+  }, [null]);
+
+  const getProducts = (id) => {
+    let headConfig = {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    };
+    //  const res = await axios.get()
+    //alert("hello---- " + id);
+    setCatbyProducts([
+      {
+        id: 1,
+        name: "Mango Cake",
+        description: "Cake made from Delicious ripe Mangoes",
+        price: 800,
+        offer_price: 100,
+        image:
+          "http://172.105.36.218:8011/media/images/mangoCake_kS3XaXE_aKPEPsC.jpeg",
+        stock: 20,
+        category: { id: 1, name: "Mango", description: "Cake from Mango" },
+      },
+      {
+        id: 2,
+        name: "Butter Cookies",
+        description: "Butter Cookies",
+        price: 100,
+        offer_price: 20,
+        image: "http://172.105.36.218:8011/media/images/ButterCookies1.jpg",
+        stock: 20,
+        category: {
+          id: 2,
+          name: "Cookies",
+          description: "Made from Cookies flavour",
+        },
+      },
+
+      {
+        id: 4,
+        name: "Butter Cookies",
+        description: "Butter Cookies",
+        price: 100,
+        offer_price: null,
+        image: "http://172.105.36.218:8011/media/images/ButterCookies5.jpg",
+        stock: 100,
+        category: {
+          id: 2,
+          name: "Cookies",
+          description: "Made from Cookies flavour",
+        },
+      },
+      {
+        id: 5,
+        name: "Vanilla Cake",
+        description: "A Vanilla Cake",
+        price: 800,
+        offer_price: null,
+        image: "http://172.105.36.218:8011/media/images/cakeimg11_OGL8SR2.jpg",
+        stock: 20,
+        category: { id: 5, name: "Vanilla", description: "Vanilla flavoured" },
+      },
+      {
+        id: 6,
+        name: "Strawberries Cake",
+        description: "Strawberries Cake",
+        price: 800,
+        offer_price: 100,
+        image: "http://172.105.36.218:8011/media/images/cakeimg26_WADYyyJ.jpg",
+        stock: 20,
+        category: {
+          id: 7,
+          name: "Strawberries",
+          description: "Strawberries flavoured",
+        },
+      },
+      {
+        id: 7,
+        name: "Pineapple Cake",
+        description: "Cake made from Pineapple",
+        price: 800,
+        offer_price: 50,
+        image: "http://172.105.36.218:8011/media/images/Cake14.jpg",
+        stock: 20,
+        category: {
+          id: 8,
+          name: "Pineapple Cake",
+          description: "cake made from pineapple",
+        },
+      },
+      {
+        id: 8,
+        name: "Custom Image Cake",
+        description: "Cake with custom Image",
+        price: 1000,
+        offer_price: 100,
+        image: "http://172.105.36.218:8011/media/images/cakeimg2_kEIQ1Yd.jpg",
+        stock: 5,
+        category: {
+          id: 9,
+          name: "Custom cake",
+          description: "Came custom-made",
+        },
+      },
+    ]);
+  };
 
   return (
     <div>
-      <div class="section-full bg-white pizza-full-menu">
-        <div tabs>
+      <div className="section-full bg-white pizza-full-menu">
+        <div>
           <div className="bg-primary pizza-items">
             <div className="container">
               <ul className="nav nav-tabs pizza-items filters">
-                <li className="nav-item item">
-                  <input type="radio" />
-                  <Link
-                    className={classnames(
-                      { active: activeTab === 1 },
-                      "item-icon-box nav-link"
-                    )}
-                    onClick={() => {
-                      toggle(1);
-                    }}
-                  >
-                    <i className="flaticon-pizza-slice"></i>
-                    <span>Cakes</span>
-                  </Link>
-                </li>
-                <li className="nav-item item">
-                  <input type="radio" />
-                  <Link
-                    className={classnames(
-                      { active: activeTab === 2 },
-                      "item-icon-box nav-link"
-                    )}
-                    onClick={() => {
-                      toggle(2);
-                    }}
-                  >
-                    <i className="flaticon-burger"></i>
-                    <span>COLA</span>
-                  </Link>
-                </li>
-                <li className="nav-item item">
-                  <input type="radio" />
-                  <Link
-                    className={classnames(
-                      { active: activeTab === 3 },
-                      "item-icon-box nav-link"
-                    )}
-                    onClick={() => {
-                      toggle(3);
-                    }}
-                  >
-                    <i className="flaticon-french-fries"></i>
-                    <span>VANILLA</span>
-                  </Link>
-                </li>
-                <li className="nav-item item">
-                  <input type="radio" />
-                  <Link
-                    className={classnames(
-                      { active: activeTab === 4 },
-                      "item-icon-box nav-link"
-                    )}
-                    onClick={() => {
-                      toggle(4);
-                    }}
-                  >
-                    <i className="flaticon-cola"></i>
-                    <span>SANDWICH</span>
-                  </Link>
-                </li>
-                <li className="nav-item item">
-                  <input type="radio" />
-                  <Link
-                    className={classnames(
-                      { active: activeTab === 5 },
-                      "item-icon-box nav-link"
-                    )}
-                    onClick={() => {
-                      toggle(5);
-                    }}
-                  >
-                    <i className="flaticon-hot-dog"></i>
-                    <span>FRIES</span>
-                  </Link>
-                </li>
-                <li className="nav-item item">
-                  <input type="radio" />
-                  <Link
-                    className={classnames(
-                      { active: activeTab === 6 },
-                      "item-icon-box nav-link"
-                    )}
-                    onClick={() => {
-                      toggle(6);
-                    }}
-                  >
-                    <i className="flaticon-cookies"></i>
-                    <span>Blackberry</span>
-                  </Link>
-                </li>
-                <li className="nav-item item">
-                  <input type="radio" />
-                  <Link
-                    className={classnames(
-                      { active: activeTab === 7 },
-                      "item-icon-box nav-link"
-                    )}
-                    onClick={() => {
-                      toggle(7);
-                    }}
-                  >
-                    <i className="flaticon-sandwich"></i>
-                    <span>COOKIES</span>
-                  </Link>
-                </li>
+                {categories.map((category, idx) => (
+                  <li className="nav-item item">
+                    <input type="radio" />
+                    <Link
+                      className={classnames(
+                        { active: activeTab === idx + 1 },
+                        "item-icon-box nav-link"
+                      )}
+                      onClick={() => {
+                        toggle(idx + 1);
+                        getProducts(category.id);
+                      }}
+                    >
+                      <i className="flaticon-pizza-slice"></i>
+                      <span>{category.name}</span>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -153,7 +189,7 @@ const Popupss = () => {
               }}
             >
               {/* CAKE SECTION */}
-              {filteredProductList.map((data, idx) => {
+              {catbyProducts.map((data, idx) => {
                 return (
                   <div key={idx} className="dz-col col m-b30">
                     <div className="item-box shop-item style2">

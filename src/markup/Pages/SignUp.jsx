@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { signupAction } from "../../redux/action/Authaction";
 import Header from "../Layout/Header";
 
@@ -98,6 +99,10 @@ function SignUp(props) {
                     <div className='col-lg-12'>
                     <button
                     type="submit" className="btn btnhover">Sign up</button>
+                    <Link to={"/Login"}>
+                    <button
+                    type="submit" className="btn btnhover">Go to Login</button>
+                    </Link>
                     </div>
                 </form>
             </div>

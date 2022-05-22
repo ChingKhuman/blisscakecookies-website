@@ -162,14 +162,7 @@ const Shopcart = ({ id }) => {
                       Checkout to Login
                     </button>{" "}
                   </Link>
-                  <div>
-                    <Link to={"/Shop-checkout"}>
-                      {" "}
-                      <button className="btn btnhover" type="button">
-                        Checkout
-                      </button>{" "}
-                    </Link>{" "}
-                  </div>
+                  <div></div>
                 </div>
               </div>
             </div>

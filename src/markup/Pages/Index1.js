@@ -31,7 +31,7 @@ const blogNews = [
   },
 ];
 
-const Index1 = () => {
+function Index1() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   let componentMounted = true;
@@ -39,35 +39,24 @@ const Index1 = () => {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.product.products);
 
-  useEffect(() => {
-    const config = {
-      headers: {
-        Authorization: "Bearer" + localStorage.getItem("token"),
-      },
-    };
-    axios.get("user").then(
-      (response) => {
-        console.log(response);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-    const getProducts = async () => {
-      setLoading(true);
-      const response = await fetch("https://cakes.manipur.ml/api/product/");
-      if (componentMounted) {
-        setProducts(await response.clone().json());
-        setLoading(false);
-        console.log(products);
-      }
-      return () => {
-        componentMounted = false;
-      };
-    };
+  const [abc, setAbc] = React.useState([]);
 
-    getProducts();
-  }, []);
+  useEffect(() => {
+    let headConfig = {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    };
+    //  const res = await axios.get()
+    axios
+      .get("http://172.105.36.218:8011/api/product/", headConfig)
+      .then((response) => {
+        console.log("response --- " + JSON.stringify(response.data));
+        setAbc(response.data);
+      })
+      .catch((e) => {
+        console.log("error ===== " + JSON.stringify(e));
+      });
+  }, [null]);
 
   const Loading = () => {
     return <>Loading....</>;
@@ -77,22 +66,29 @@ const Index1 = () => {
     <>
       <Header />
       <div className="page-content bg-white">
-        <div className="content-block">
-          <Slider />
-          <div
-            className="section-full content-inner-3"
-            style={{
-              backgroundImage: "url(" + img1 + ")",
-              backgroundSize: "50%",
-            }}
-          ></div>
-          <div></div>
+        <div
+          className="dlab-bnr-inr overlay-black-middle bg-pt"
+          style={{ backgroundImage: "url(" + img1 + ")" }}
+        >
+          <div className="content-block">
+            <Slider />
+            <div
+              className="section-full content-inner-3"
+              style={{
+                backgroundImage: "url(" + img1 + ")",
+                backgroundSize: "50%",
+              }}
+            ></div>
+            <div></div>
+          </div>
 
           <div className="section-full bg-white">
             <div className="container-fluid">
               <div className="row">
-                {productList.slice(0, 4).map((products, id) => {
-                  console.log(products);
+                {abc.slice(0, 4)?.map((products, idx) => {
+                  console.log(
+                    "--------------------------------------------------------"
+                  );
                   return (
                     <div className="col-lg-3 col-md-6 col-sm-6">
                       <div className="port-box1 text-white">
@@ -104,8 +100,6 @@ const Index1 = () => {
 
                         <div className="dlab-info">
                           <h2 className="title">{products.name}</h2>
-                          {/*     <h2 className="description">{products.description}</h2>
-                           */}
                         </div>
                       </div>
                     </div>
@@ -121,6 +115,6 @@ const Index1 = () => {
       <Footer />
     </>
   );
-};
+}
 
 export default Index1;
