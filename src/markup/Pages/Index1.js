@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
 import { Link, useParams } from "react-router-dom";
-import CountUp from "react-countup";
-import OurPartners from "./../Element/OurPartners";
+import * as ReactBootStrap from "react-bootstrap";
 import Slider from "./../Element/Slider";
 import Tab from "./../Pages/Tab";
 import axios from "axios";
@@ -32,14 +31,12 @@ const blogNews = [
 ];
 
 function Index1() {
-  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  let componentMounted = true;
 
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.product.products);
 
-  const [abc, setAbc] = React.useState([]);
+  const [productss, setProductss] = React.useState([]);
 
   useEffect(() => {
     let headConfig = {
@@ -47,16 +44,19 @@ function Index1() {
       "Content-type": "application/json",
     };
     //  const res = await axios.get()
-    axios
-      .get("http://172.105.36.218:8011/api/product/", headConfig)
-      .then((response) => {
-        console.log("response --- " + JSON.stringify(response.data));
-        setAbc(response.data);
-      })
-      .catch((e) => {
-        console.log("error ===== " + JSON.stringify(e));
-      });
-  }, [null]);
+    try {
+      axios
+        .get("http://172.105.36.218:8011/api/product/", headConfig)
+        .then((response) => {
+          console.log("response --- " + JSON.stringify(response.data));
+          setProductss(response.data);
+        });
+      setLoading(true);
+    } catch (e) {
+      console.log("error ===== " + JSON.stringify(e));
+      return e.response;
+    }
+  }, []);
 
   const Loading = () => {
     return <>Loading....</>;
@@ -85,16 +85,28 @@ function Index1() {
           <div className="section-full bg-white">
             <div className="container-fluid">
               <div className="row">
-                {abc.slice(0, 4)?.map((products, idx) => {
+                {productss.slice(0, 4)?.map((products) => {
                   console.log(
                     "--------------------------------------------------------"
                   );
                   return (
-                    <div className="col-lg-3 col-md-6 col-sm-6">
+                    <div
+                      key={products.id}
+                      className="col-lg-3 col-md-6 col-sm-6"
+                    >
                       <div className="port-box1 text-white">
                         <div className="dlab-media" style={{ height: "400px" }}>
                           <Link to={`/shop-product-details/${products.id}`}>
-                            <img src={products.image} alt="" />
+                            <img
+                              src={
+                                loading ? (
+                                  products.image
+                                ) : (
+                                  <ReactBootStrap.Spinner animation="border" />
+                                )
+                              }
+                              alt=""
+                            />
                           </Link>
                         </div>
 

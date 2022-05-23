@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
-import classnames from "classnames";
+import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -46,107 +45,17 @@ const Popupss = () => {
       });
   }, [null]);
 
-  const getProducts = (id) => {
+  const getProducts = async (id) => {
     let headConfig = {
       Accept: "application/json",
       "Content-type": "application/json",
     };
-    //  const res = await axios.get()
-    //alert("hello---- " + id);
-    setCatbyProducts([
-      {
-        id: 1,
-        name: "Mango Cake",
-        description: "Cake made from Delicious ripe Mangoes",
-        price: 800,
-        offer_price: 100,
-        image:
-          "http://172.105.36.218:8011/media/images/mangoCake_kS3XaXE_aKPEPsC.jpeg",
-        stock: 20,
-        category: { id: 1, name: "Mango", description: "Cake from Mango" },
-      },
-      {
-        id: 2,
-        name: "Butter Cookies",
-        description: "Butter Cookies",
-        price: 100,
-        offer_price: 20,
-        image: "http://172.105.36.218:8011/media/images/ButterCookies1.jpg",
-        stock: 20,
-        category: {
-          id: 2,
-          name: "Cookies",
-          description: "Made from Cookies flavour",
-        },
-      },
+    const res = await axios.get(
+      `http://172.105.36.218:8011/api/product/productbycategory/?category=${id}`
+    );
 
-      {
-        id: 4,
-        name: "Butter Cookies",
-        description: "Butter Cookies",
-        price: 100,
-        offer_price: null,
-        image: "http://172.105.36.218:8011/media/images/ButterCookies5.jpg",
-        stock: 100,
-        category: {
-          id: 2,
-          name: "Cookies",
-          description: "Made from Cookies flavour",
-        },
-      },
-      {
-        id: 5,
-        name: "Vanilla Cake",
-        description: "A Vanilla Cake",
-        price: 800,
-        offer_price: null,
-        image: "http://172.105.36.218:8011/media/images/cakeimg11_OGL8SR2.jpg",
-        stock: 20,
-        category: { id: 5, name: "Vanilla", description: "Vanilla flavoured" },
-      },
-      {
-        id: 6,
-        name: "Strawberries Cake",
-        description: "Strawberries Cake",
-        price: 800,
-        offer_price: 100,
-        image: "http://172.105.36.218:8011/media/images/cakeimg26_WADYyyJ.jpg",
-        stock: 20,
-        category: {
-          id: 7,
-          name: "Strawberries",
-          description: "Strawberries flavoured",
-        },
-      },
-      {
-        id: 7,
-        name: "Pineapple Cake",
-        description: "Cake made from Pineapple",
-        price: 800,
-        offer_price: 50,
-        image: "http://172.105.36.218:8011/media/images/Cake14.jpg",
-        stock: 20,
-        category: {
-          id: 8,
-          name: "Pineapple Cake",
-          description: "cake made from pineapple",
-        },
-      },
-      {
-        id: 8,
-        name: "Custom Image Cake",
-        description: "Cake with custom Image",
-        price: 1000,
-        offer_price: 100,
-        image: "http://172.105.36.218:8011/media/images/cakeimg2_kEIQ1Yd.jpg",
-        stock: 5,
-        category: {
-          id: 9,
-          name: "Custom cake",
-          description: "Came custom-made",
-        },
-      },
-    ]);
+    console.log("---------------------" + JSON.stringify(res));
+    setCatbyProducts(res.data);
   };
 
   return (
@@ -160,10 +69,11 @@ const Popupss = () => {
                   <li className="nav-item item">
                     <input type="radio" />
                     <Link
-                      className={classnames(
-                        { active: activeTab === idx + 1 },
-                        "item-icon-box nav-link"
-                      )}
+                      to={""}
+                      className={
+                        ({ active: activeTab === idx + 1 },
+                        "item-icon-box nav-link")
+                      }
                       onClick={() => {
                         toggle(idx + 1);
                         getProducts(category.id);
@@ -189,9 +99,9 @@ const Popupss = () => {
               }}
             >
               {/* CAKE SECTION */}
-              {catbyProducts.map((data, idx) => {
+              {catbyProducts.map((data) => {
                 return (
-                  <div key={idx} className="dz-col col m-b30">
+                  <div key={data.id} className="dz-col col m-b30">
                     <div className="item-box shop-item style2">
                       <div className="item-img" style={{ height: "300px" }}>
                         <img src={data.image} alt="cake" />
