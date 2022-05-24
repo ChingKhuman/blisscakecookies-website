@@ -60,7 +60,7 @@ const Shopcart = ({ id }) => {
                         <th>Product</th>
                         <th>Product name</th>
                         <th>Unit Price</th>
-                        {/*}   <th>Quantity</th>   */}
+                        <th>Quantity</th>
                         <th>Total</th>
                         <th>Close</th>
                       </tr>

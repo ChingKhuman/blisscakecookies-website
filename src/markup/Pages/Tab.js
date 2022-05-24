@@ -103,7 +103,7 @@ const Popupss = () => {
                 return (
                   <div key={data.id} className="dz-col col m-b30">
                     <div className="item-box shop-item style2">
-                      <div className="item-img" style={{ height: "300px" }}>
+                      <div className="item-img" style={{ height: "200px" }}>
                         <img src={data.image} alt="cake" />
                       </div>
                       <div className="item-info text-center">

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Header from "./../Layout/Header";
-import Footer from "./../Layout/Footer";
+import Header from "../Layout/Header";
+import Footer from "../Layout/Footer";
 import { Link, useParams } from "react-router-dom";
 import * as ReactBootStrap from "react-bootstrap";
-import Slider from "./../Element/Slider";
-import Tab from "./../Pages/Tab";
+import Slider from "../Element/Slider";
+import Tab from "./Tab";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import ProductService from "../../redux/services/ProductService";
