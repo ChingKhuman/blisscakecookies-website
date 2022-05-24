@@ -163,7 +163,7 @@ function Header(props) {
 
                   <Link to={"/Shop-cart"}>
                     Cart
-                    <span className="cartlogo__badge">({getCartCount})</span>
+                    <span className="cartlogo__badge">{getCartCount()}</span>
                   </Link>
                 </li>
                 {!props.isAuthenticated && (
