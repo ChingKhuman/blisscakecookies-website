@@ -1,5 +1,3 @@
-
-
 import { ADD_TO_CART, REMOVE_FROM_CART, CART_RESET, GET_TOTALS, INCREASE, DECREASE, CLEAR_ITEMS, UPDATE_CART_UNITS } from "../actionType"; 
 import axios from "../../helper/Constant";
 
@@ -38,6 +36,7 @@ export const addToCart = (data, qty) => async (dispatch, getState) => {
   });
 
   localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
+
 };
 
 
