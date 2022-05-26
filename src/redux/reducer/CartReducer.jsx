@@ -1,29 +1,31 @@
+import { ADD_TO_CART } from "../actionType";
 
 import * as actionTypes from '../actionType'
-
-const CART_INITIAL_STATE = {
-  totalAmount: 0,
-  totalCount: 0,
+const initialState = {
   cartItems: [],
-};
+}
 
-export const CartReducer = (state = CART_INITIAL_STATE, action) => {
-  switch (action.type) {
+
+
+
+  const CartReducer = (state = initialState, action)=> {
+   let cartItems = state.cartItems;
+    switch (action.type) {
     case "ADD_TO_CART" : 
+    cartItems.push(action.payload) ;
     return {
-      cartItems: [...state.cartItems, action.payload]
+      ...state,
+      cartItems: cartItems
     };
-
-
-    break;
-    
-    
+                break;
+ 
     case actionTypes.REMOVE_FROM_CART:
       return {
         ...state,
         cartItems: state.cartItems.filter((x) => x.id !== action.payload.id),
       };
 
+    
 
    //     const existItem = findItem(cart, payload.id);
 
@@ -32,6 +34,7 @@ export const CartReducer = (state = CART_INITIAL_STATE, action) => {
       
 
        
+     {/*}
       case INCREASE:
         console.log("payload.. itemmmm "+JSON.stringify(action.payload))
         
@@ -52,13 +55,15 @@ export const CartReducer = (state = CART_INITIAL_STATE, action) => {
           })
           .filter((cartItems) => cartItems.amount !== 0);
         return { ...state, cartItems: tempCartDec };
+
+        */}
       
-      case CLEAR_ITEMS:
+      case actionTypes.CLEAR_ITEMS:
         return {
           ...state,
           cartItems: [],
         };
-     
+   
       
     default:
       return state;

@@ -23,17 +23,17 @@ export const removeFromCart = (dataID) => {
   return {
     type: actionTypes.REMOVE_FROM_CART,
     payload: {
-    id:  dataID,
+    id: dataID,
      
   },
 }  
 }
 
 
-export const addToCart = (dataID) => {
+export const addToCart = (data) => {
   return {
-    type: "ADD_TO_CART",
-    payload: dataID,
+    type: ADD_TO_CART,
+    payload:data
 }
   };
 

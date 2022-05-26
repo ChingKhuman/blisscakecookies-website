@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
-import { addToCart } from "../../redux/action/CartAction";
+import { addToCart, removeFromCart } from "../../redux/action/CartAction";
 import axios from "axios";
 
 const Popupss = () => {
@@ -56,6 +56,18 @@ const Popupss = () => {
 
     console.log("---------------------" + JSON.stringify(res));
     setCatbyProducts(res.data);
+  };
+
+  const [cartBtn, setCartBtn] = useState("Add to Cart");
+
+  const handleCart = (data) => {
+    if (cartBtn === "Add to Cart") {
+      dispatch(addToCart(data));
+      setCartBtn("Remove from cart");
+    } else {
+      dispatch(removeFromCart(data));
+      setCartBtn("Add to Cart");
+    }
   };
 
   return (
@@ -118,13 +130,14 @@ const Popupss = () => {
                         </h5>
                         <div className="cart-btn">
                           <Button
-                            onClick={() => {
-                              console.log("add to cart", 1);
-                              dispatch(addToCart(data, 1));
-                            }}
+                            onClick={() =>
+                              //         console.log("add to cart", 1);
+                              handleCart(data)
+                            }
                             className="btn btnhover radius-xl"
                           >
-                            <i className="ti-shopping-cart"></i> Add To Cart
+                            <i className="ti-shopping-cart"></i>
+                            {cartBtn}
                           </Button>
                         </div>
                       </div>
