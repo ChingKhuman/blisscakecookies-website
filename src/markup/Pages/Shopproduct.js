@@ -6,16 +6,14 @@ import { useParams } from "react-router-dom";
 import { addToCart } from "../../redux/action/CartAction";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { Form } from "react-bootstrap";
 
 var img1 = require("./../../images/banner/bnr1.jpg");
 
 const Shopproduct = () => {
   const { id } = useParams();
-  const [product, setProduct] = React.useState([]);
-  const [loading, setLoading] = useState(false);
+  const [data, setData] = React.useState([]);
+
   const dispatch = useDispatch();
-  const [abc, setAbc] = React.useState([]);
 
   useEffect(() => {
     let headConfig = {
@@ -27,7 +25,7 @@ const Shopproduct = () => {
       .get(`http://172.105.36.218:8011/api/product/${id}/`, headConfig)
       .then((response) => {
         console.log("response --- " + JSON.stringify(response.data));
-        setProduct(response.data);
+        setData(response.data);
       })
       .catch((e) => {
         console.log("error ===== " + JSON.stringify(e));
@@ -71,7 +69,7 @@ const Shopproduct = () => {
                   >
                     <div className="dlab-box">
                       <div className="dlab-thum-bx">
-                        <img src={product.image} alt="" />
+                        <img src={data.image} alt="" />
                         <span
                           data-exthumbimage="images/product/item2.jpg"
                           data-src={require("./../../images/product/item2.jpg")}
@@ -88,7 +86,7 @@ const Shopproduct = () => {
                 <div className="col-lg-6 m-b30">
                   <form method="post" className="cart sticky-top">
                     <div className="dlab-post-title">
-                      <h4 className="post-title">{product.name}</h4>;
+                      <h4 className="post-title">{data.name}</h4>;
                       <p className="m-b10">
                         Lorem Ipsum is simply dummy text of the printing and
                       </p>
@@ -98,7 +96,7 @@ const Shopproduct = () => {
                     </div>
 
                     <div className="relative">
-                      <h3 className="m-tb10">Rs{product.price} </h3>;
+                      <h3 className="m-tb10">Rs{data.price} </h3>;
                       <div className="shop-item-rating">
                         <span className="rating-bx">
                           <i className="fa fa-star"></i>
@@ -164,18 +162,16 @@ const Shopproduct = () => {
                       </div>
                     </div>
 
-                    <Link to={"/Shop-cart"}>
-                      <button
-                        onClick={() => {
-                          //               console.log("add to cart", 1);
-                          dispatch(addToCart(product, 1));
-                        }}
-                        className="btn btnhover"
-                      >
-                        <i className="ti-shopping-cart"></i>
-                        Add To Cart
-                      </button>
-                    </Link>
+                    <button
+                      onClick={() => {
+                        //               console.log("add to cart", 1);
+                        dispatch(addToCart(data));
+                      }}
+                      className="btn btnhover"
+                    >
+                      <i className="ti-shopping-cart"></i>
+                      Add To Cart
+                    </button>
                   </form>
                 </div>
               </div>

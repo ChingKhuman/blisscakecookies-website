@@ -1,5 +1,5 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_ITEMS, INCREASE, DECREASE, GET_TOTALS, UPDATE_CART_UNITS } from "../actionType"; 
-import * as types from '../actionType'
+
+import * as actionTypes from '../actionType'
 
 const CART_INITIAL_STATE = {
   totalAmount: 0,
@@ -9,35 +9,19 @@ const CART_INITIAL_STATE = {
 
 export const CartReducer = (state = CART_INITIAL_STATE, action) => {
   switch (action.type) {
-    case ADD_TO_CART:
-      const item = action.payload;
-      const existItem = state.cartItems?.find((x) => x.product === item.product) ?? [];
-   
+    case "ADD_TO_CART" : 
+    return {
+      cartItems: [...state.cartItems, action.payload]
+    };
 
-      if (existItem) {
-        return {
-          ...state,
-          cartItems: state.cartItems?.map((x) =>
-            x.product === existItem.product ? item : x
-           
-          
-          ) ?? [],
-          
-       
-        };
-      } 
+
+    break;
     
-    else {
-        return {
-          ...state,
-          cartItems: [...state.cartItems, item],
-        };
-      }
     
-    case REMOVE_FROM_CART:
+    case actionTypes.REMOVE_FROM_CART:
       return {
         ...state,
-        cartItems: state.cartItems.filter((x) => x.product !== action.payload),
+        cartItems: state.cartItems.filter((x) => x.id !== action.payload.id),
       };
 
 

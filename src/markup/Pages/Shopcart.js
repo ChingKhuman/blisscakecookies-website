@@ -67,81 +67,89 @@ const Shopcart = ({ id }) => {
                     </thead>
                     <div className="row">
                       <tbody>
-                        <div className="row-1">
-                          {productList?.map((product) => {
-                            console.log(product);
-                            return (
-                              <tr key={product.id} className="alert">
-                                <td className="product-item-img">
-                                  <img src={product.imageUrl} alt="" />
-                                </td>
-                                <td className="product-item-name">
-                                  {product.name}
-                                </td>
-                                <td className="product-item-price">
-                                  Rs{product.price}
-                                </td>
+                        <thead>
+                          <tr>
+                            <div className="row-1">
+                              {productList?.map((data, id) => {
+                                //             console.log(data);
+                                return (
+                                  <tr key={id} className="alert">
+                                    <td className="product-item-img">
+                                      <img src={data.image} alt="" />
+                                    </td>
+                                    <td className="product-item-name">
+                                      {data.name}
+                                    </td>
+                                    <td className="product-item-price">
+                                      Rs{data.price}
+                                    </td>
 
-                                <td className="product-item-quantity">
-                                  <div className="quantity btn-quantity max-w80">
-                                    <Form>
-                                      <Form.Group controlId="exampleForm.SelectCustom">
-                                        <Form.Control
-                                          as="select"
-                                          custom
-                                          value={product.qty}
-                                          onChange={(e) => {
-                                            //			dispatch(increase(id))}>
-                                            console.log(e.target.value);
-                                            dispatch(
-                                              updateCartUnits(
-                                                product,
-                                                e.target.value
-                                              )
-                                            );
-                                          }}
-                                        >
-                                          <option value="1">1</option>
-                                          <option value="2">2</option>
-                                          <option value="3">3</option>
-                                          <option value="4">4</option>
-                                          <option value="5">5</option>
-                                        </Form.Control>
-                                      </Form.Group>
-                                    </Form>
-                                  </div>
-                                </td>
+                                    <td className="product-item-quantity">
+                                      <div className="quantity btn-quantity max-w80">
+                                        <Form>
+                                          <Form.Group controlId="exampleForm.SelectCustom">
+                                            <Form.Control
+                                              as="select"
+                                              custom
+                                              value={data.qty}
+                                              onChange={(e) => {
+                                                //			dispatch(increase(id))}>
+                                                console.log(e.target.value);
+                                                dispatch(
+                                                  updateCartUnits(
+                                                    data,
+                                                    e.target.value
+                                                  )
+                                                );
+                                              }}
+                                            >
+                                              <option value="1">1</option>
+                                              <option value="2">2</option>
+                                              <option value="3">3</option>
+                                              <option value="4">4</option>
+                                              <option value="5">5</option>
+                                            </Form.Control>
+                                          </Form.Group>
+                                        </Form>
+                                      </div>
+                                    </td>
 
-                                <td className="product-item-totle">
-                                  Rs{" "}
-                                  {parseInt(product.price) *
-                                    parseInt(product.qty)}
-                                </td>
-                                <td className="product-item-close">
-                                  <button
-                                    onClick={() => dispatch(removeFromCart())}
-                                    data-dismiss="alert"
-                                    aria-label="close"
-                                    className="ti-close"
-                                  ></button>
-                                </td>
-                                <button
-                                  color="danger"
-                                  onClick={() => dispatch(clearItems())}
-                                  style={{ width: "140px", marginTop: "30px" }}
-                                >
-                                  Clear Cart
-                                </button>
-                              </tr>
-                            );
-                          })}
-                        </div>
+                                    <td className="product-item-totle">
+                                      Rs
+                                      {parseInt(data.offer_price) *
+                                        parseInt(data.qty)}
+                                    </td>
+                                    <td className="product-item-close">
+                                      <button
+                                        onClick={() => removeFromCart(data.id)}
+                                        data-dismiss="alert"
+                                        aria-label="close"
+                                        className="ti-close"
+                                      ></button>
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                            </div>
+                          </tr>
+                        </thead>
                       </tbody>
                     </div>
+                    <button
+                      color="danger"
+                      onClick={() => dispatch(clearItems())}
+                      style={{
+                        width: "140px",
+                        marginTop: "30px",
+                      }}
+                    >
+                      Clear Cart
+                    </button>
                   </table>
                 </div>
               </div>
             </div>
+
             <div className="row">
               <div className="col-lg-6 col-md-6">
                 <h3>Cart Subtotal</h3>

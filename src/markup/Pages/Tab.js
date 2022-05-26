@@ -17,7 +17,16 @@ const Popupss = () => {
   };
 
   const dispatch = useDispatch();
+  const productList = useSelector((state) => state.product.products);
 
+  /*
+  const filteredProductList = useMemo(() => {
+    return productList.filter((p) => p.category.id === activeTab);
+  }, [productList, activeTab]);
+
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, []);*/
   useEffect(() => {
     let headConfig = {
       Accept: "application/json",
@@ -48,8 +57,6 @@ const Popupss = () => {
     console.log("---------------------" + JSON.stringify(res));
     setCatbyProducts(res.data);
   };
-
-  const [cartBtn, setCartBtn] = useState("Add to Cart");
 
   return (
     <div>
@@ -111,11 +118,13 @@ const Popupss = () => {
                         </h5>
                         <div className="cart-btn">
                           <Button
-                            //         onClick={() => handleCart(product)}
-                            className="btn btnhover"
+                            onClick={() => {
+                              console.log("add to cart", 1);
+                              dispatch(addToCart(data, 1));
+                            }}
+                            className="btn btnhover radius-xl"
                           >
-                            {cartBtn}
-                            <i className="ti-shopping-cart"></i>
+                            <i className="ti-shopping-cart"></i> Add To Cart
                           </Button>
                         </div>
                       </div>

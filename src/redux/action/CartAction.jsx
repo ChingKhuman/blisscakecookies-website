@@ -1,5 +1,6 @@
 import { ADD_TO_CART, REMOVE_FROM_CART, CART_RESET, GET_TOTALS, INCREASE, DECREASE, CLEAR_ITEMS, UPDATE_CART_UNITS } from "../actionType"; 
 import axios from "../../helper/Constant";
+import * as actionTypes from "../actionType"
 
 
 
@@ -18,26 +19,25 @@ export const clearItems = () => ({
   type: CLEAR_ITEMS,
 });
 
-
-export const addToCart = (data, qty) => async (dispatch, getState) => {
-  //const { data } = await axios.get(`/product/${id}`);
-  console.log("======="+JSON.stringify(data))
-
-  dispatch({
-    type: ADD_TO_CART,
+export const removeFromCart = (dataID) => {
+  return {
+    type: actionTypes.REMOVE_FROM_CART,
     payload: {
-      product: data.id,
-      name: data.name,
-      imageUrl: data.image,
-      price: data.price,
-      countInStock: data.countInStock,
-      qty,
-    },
-  });
+    id:  dataID,
+     
+  },
+}  
+}
 
-  localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
 
-};
+export const addToCart = (dataID) => {
+  return {
+    type: "ADD_TO_CART",
+    payload: dataID,
+}
+  };
+
+
 
 
 export const updateCartUnits = (data, qtyy) => async (dispatch, getState) => {
@@ -60,11 +60,3 @@ export const updateCartUnits = (data, qtyy) => async (dispatch, getState) => {
 }
 
 
-export const removeFromCart = (id) => (dispatch, getState) => {
-  dispatch({
-    type: REMOVE_FROM_CART,
-    payload: id,
-  });
-
-  localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
-};
