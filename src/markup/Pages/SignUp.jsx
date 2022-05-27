@@ -9,11 +9,12 @@ import Header from "../Layout/Header";
 function SignUp(props) {
 
     
-    const [username, setUsername] = useState('');
+    const [user_name, setUser_Name] = useState('');
     const [email, setEmail] = useState('');
     let errorsObj = {email: '', password: ''};
     const [errors, setErrors] = useState(errorsObj);
     const [password, setPassword] = useState('');
+    const [mobile, setMobile]  = useState('');
 
     const dispatch = useDispatch();
 
@@ -34,7 +35,7 @@ function SignUp(props) {
 
             if(error)  return;
                 
-            dispatch(signupAction(email, password, props.history));
+            dispatch(signupAction(email, password,user_name, mobile,  props.history));
         }
     return (
         <>
@@ -65,12 +66,12 @@ function SignUp(props) {
                             <input
                             type="text"
                             className="border border-grey-300 p-1 w-full"
-                            value={username} 
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={user_name} 
+                            onChange={(e) => setUser_Name(e.target.value)}
                             />
                             
                         </div>
-                        {errors.username && <div>{errors.username}</div>}
+                        {errors.user_name && <div>{errors.user_name}</div>}
                     </div>
                     <div className='container' style={{fontSize:"20px"}}>
                         <label>Email</label>
@@ -96,6 +97,19 @@ function SignUp(props) {
                         </div>
                         {errors.password && <div>{errors.password}</div>}
                     </div>
+                    <div>
+                    <div className='container' style={{fontSize:"20px"}}>
+                        <label>Mobile</label>
+                            <input
+                            type="mobile"
+                            className="border border-grey-300 p-1 w-full"
+                            value={mobile} 
+                            onChange={(e) => setMobile(e.target.value)}
+                            />
+                        </div>
+
+                        {errors.mobile && <div>{errors.mobile}</div>}
+                        </div>
                     <div className='col-lg-12'>
                     <button
                     type="submit" className="btn btnhover">Sign up</button>

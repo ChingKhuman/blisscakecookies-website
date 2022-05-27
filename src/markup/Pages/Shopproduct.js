@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
 import { useParams } from "react-router-dom";
-import { addToCart } from "../../redux/action/CartAction";
+import { addToCart, removeFromCart } from "../../redux/action/CartAction";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 
@@ -31,6 +31,18 @@ const Shopproduct = () => {
         console.log("error ===== " + JSON.stringify(e));
       });
   }, [null]);
+
+  const [cartbtn, setCartBtn] = useState("Add to Cart");
+
+  const handleCart = (data) => {
+    if (cartbtn === "Add to Cart") {
+      dispatch(addToCart(data));
+      setCartBtn("Remove from Cart");
+    } else {
+      dispatch(removeFromCart(data));
+      setCartBtn("Add to Cart");
+    }
+  };
 
   return (
     <>
@@ -84,12 +96,10 @@ const Shopproduct = () => {
                 </div>
 
                 <div className="col-lg-6 m-b30">
-                  <form method="post" className="cart sticky-top">
+                  <form className="cart sticky-top">
                     <div className="dlab-post-title">
                       <h4 className="post-title">{data.name}</h4>;
-                      <p className="m-b10">
-                        Lorem Ipsum is simply dummy text of the printing and
-                      </p>
+                      <h3 className="m-b10">{data.description}</h3>
                       <div className="dlab-divider bg-gray tb15">
                         <i className="icon-dot c-square"></i>
                       </div>
@@ -161,19 +171,15 @@ const Shopproduct = () => {
                         </div>
                       </div>
                     </div>
-
-                    <button
-                      onClick={() => {
-                        //               console.log("add to cart", 1);
-                        dispatch(addToCart(data));
-                      }}
-                      className="btn btnhover"
-                    >
-                      <i className="ti-shopping-cart"></i>
-                      Add To Cart
-                    </button>
                   </form>
                 </div>
+                <button
+                  onClick={() => handleCart(data)}
+                  className="btn btnhover radius-xl"
+                >
+                  <i className="ti-shopping-cart"></i>
+                  {cartbtn}
+                </button>
               </div>
             </div>
           </div>

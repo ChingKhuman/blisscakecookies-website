@@ -4,11 +4,18 @@ SIGNUP_FAILED_ACTION} from "../action/Authaction"
 
 const initialState= {
   auth: {
-    email: '',
+     
+    email: '',    
     password: '',
+    localId: '',
+    expiresIn: '',
+    idToken: '',
     token: '',
+
   },
   errorMessage: '',
+  successMessage: '',
+  showLoading: false,
 };
 export function AuthReducer(state = initialState, action) {
 
@@ -17,6 +24,9 @@ export function AuthReducer(state = initialState, action) {
     return {
       ...state,
       auth: action.payload,
+      errorMessage: '',
+      successMessage: 'SignUp Successful',
+      showLoading: false,
     };
     }
 
@@ -32,8 +42,11 @@ export function AuthReducer(state = initialState, action) {
       return {
         ...state,
         auth: {
-          email: '',
+          email: '',    
           password: '',
+          localId: '',
+          expiresIn: '',
+          idToken: '',
           token: '',
         },
       };

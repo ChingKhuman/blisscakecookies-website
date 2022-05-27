@@ -8,13 +8,13 @@ export const LOGIN_CONFIRMED_ACTION = '[login action] confirmed login';
 export const LOGIN_FAILED_ACTION = '[login action] failed login';
 export const LOGOUT_ACTION = '[Logout action] logout action';
 
-export  function signupAction(email, password, history) {
+export  function signupAction(email, password,user_name, mobile, history) {
     return (dispatch) => {
-        signUp(email, password).then((response) => {
+        signUp(email, password, user_name, mobile).then((response) => {
             saveTokenInLocalStorage(response.data);
    //         console.log(response);
-          runLogoutTimer(dispatch, response.data.expiresIn * 1000);
-            dispatch(confirmedSignupAction(response.data));
+          runLogoutTimer(dispatch, response.data.expiresIn * 10000);
+            dispatch(signUpConfirmedAction(response.data));
             history.push('/shop-checkout')
         })
                 .catch((error) => {
@@ -63,7 +63,7 @@ export function logoutAction(history) {
     };
 }
 
-export function confirmedSignupAction(payload) {
+export function signUpConfirmedAction(payload) {
 return {
     type: SIGNUP_CONFIRMED_ACTION,
     payload,

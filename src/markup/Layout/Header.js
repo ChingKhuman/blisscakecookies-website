@@ -14,16 +14,8 @@ function Header(props) {
 
   const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  const cart = useSelector((state) => state.cart.cartItems);
 
-  const getCartCount = () => {
-    if (cartItems !== undefined) {
-      console.log(cartItems);
-
-      return cartItems.reduce((qty, item) => qty + item.qty, 0);
-    }
-  };
   useEffect(() => {
     // sidebar open/close
 
@@ -136,17 +128,14 @@ function Header(props) {
                     <li>
                       <Link to={"/shop-sidebar"}>Shop Sidebar</Link>
                     </li>
-                    {/*}      <li>
-                      <Link to={"/shop-product-details"}>Product Details</Link>
-    </li>
-    */}
+                    <li>
+                      <Link to={"/contact-1"}>Contact</Link>
+                    </li>
+
                     <li>
                       <Link to={"/shop-cart"}>Cart</Link>
                     </li>
-                    {/*}    <li>
-                      <Link to={"/shop-wishlist"}>Wishlist</Link>
-                    </li>
-*/}
+
                     <li>
                       <Link to={"/shop-checkout"}>Checkout</Link>
                     </li>
@@ -158,12 +147,15 @@ function Header(props) {
                     </li>
                   </ul>
                 </li>
-                <li>
-                  <Link to={"/contact-1"}>Contact</Link>
 
+                <li>
                   <Link to={"/Shop-cart"}>
-                    Cart
-                    <span className="cartlogo__badge">{getCartCount()}</span>
+                    <i
+                      className="ti-shopping-cart"
+                      style={{ fontSize: "20px" }}
+                    >
+                      {cart.length}
+                    </i>
                   </Link>
                 </li>
                 {!props.isAuthenticated && (

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { addToCart, removeFromCart } from "../../redux/action/CartAction";
 import axios from "axios";
+import { connect } from "formik";
 
 const Popupss = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -17,7 +18,7 @@ const Popupss = () => {
   };
 
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.product.products);
+  const cart = useSelector((state) => state.cart.cartItems);
 
   /*
   const filteredProductList = useMemo(() => {
@@ -56,18 +57,6 @@ const Popupss = () => {
 
     console.log("---------------------" + JSON.stringify(res));
     setCatbyProducts(res.data);
-  };
-
-  const [cartBtn, setCartBtn] = useState("Add to Cart");
-
-  const handleCart = (data) => {
-    if (cartBtn === "Add to Cart") {
-      dispatch(addToCart(data));
-      setCartBtn("Remove from cart");
-    } else {
-      dispatch(removeFromCart(data));
-      setCartBtn("Add to Cart");
-    }
   };
 
   return (
@@ -129,16 +118,20 @@ const Popupss = () => {
                           <span>₹ {data.offer_price}</span>
                         </h5>
                         <div className="cart-btn">
-                          <Button
-                            onClick={() =>
-                              //         console.log("add to cart", 1);
-                              handleCart(data)
-                            }
-                            className="btn btnhover radius-xl"
+                          <button
+                            onClick={() => {
+                              //console.log("add to cart", 1);
+                              dispatch(addToCart(data));
+                            }}
+                            className="btn btnhover"
                           >
                             <i className="ti-shopping-cart"></i>
-                            {cartBtn}
-                          </Button>
+                            Add To Cart
+                          </button>
+                          <Link to={"/Shop-cart"}>
+                            <i className="ti-shopping-cart"></i>
+                            Go To Cart
+                          </Link>
                         </div>
                       </div>
                     </div>

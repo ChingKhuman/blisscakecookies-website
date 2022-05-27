@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from "../actionType";
+import { ADD_TO_CART , INCREASE, DECREASE} from "../actionType";
 
 import * as actionTypes from '../actionType'
 const initialState = {
@@ -25,16 +25,8 @@ const initialState = {
         cartItems: state.cartItems.filter((x) => x.id !== action.payload.id),
       };
 
-    
-
-   //     const existItem = findItem(cart, payload.id);
-
-    
-
-      
-
-       
-     {/*}
+   
+   
       case INCREASE:
         console.log("payload.. itemmmm "+JSON.stringify(action.payload))
         
@@ -56,7 +48,7 @@ const initialState = {
           .filter((cartItems) => cartItems.amount !== 0);
         return { ...state, cartItems: tempCartDec };
 
-        */}
+   
       
       case actionTypes.CLEAR_ITEMS:
         return {

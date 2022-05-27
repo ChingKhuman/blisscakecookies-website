@@ -3,15 +3,28 @@ import axios from "../../helper/Constant";
 import * as actionTypes from "../actionType"
 
 
+export const addToCart = (data) => {
+  return {
+    type: "ADD_TO_CART",
+    payload:data
+}
+  };
 
-export const increase = (id) => ({
+  export const delCart = (data) => {
+    return {
+      type: "DELITEM",
+      payload : data
+    }
+  }
+
+export const increase = (data) => ({
   type: INCREASE,
-  payload: id,
+  payload: data,
 });
 
-export const decrease = (id) => ({
+export const decrease = (data) => ({
   type: DECREASE,
-  payload: id,
+  payload: data,
 });
 
 
@@ -30,33 +43,10 @@ export const removeFromCart = (dataID) => {
 }
 
 
-export const addToCart = (data) => {
-  return {
-    type: ADD_TO_CART,
-    payload:data
-}
-  };
 
 
 
 
-export const updateCartUnits = (data, qtyy) => async (dispatch, getState) => {
-  console.log("update... checking.. "+JSON.stringify(data)+"    qty "+qtyy)
 
-  console.log("------------------- "+JSON.stringify(getState().cart.cartItems))
-
-  dispatch ({
-    type: INCREASE,
-    payload: {
-      product: data.id,
-      name: data.name,
-      imageUrl: data.image,
-      price: data.price,
-      countInStock: data.countInStock,
-      qty: 2,
-    },
-  })
-  localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
-}
 
 

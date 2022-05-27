@@ -1,4 +1,4 @@
-import React, { Component, useMemo } from "react";
+import React, { Component, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
@@ -6,8 +6,8 @@ import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearItems,
+  decrease,
   increase,
-  addToCart,
   removeFromCart,
   updateCartUnits,
 } from "../../redux/action/CartAction";
@@ -23,6 +23,14 @@ const Shopcart = ({ id }) => {
       return productList.reduce((acc, p) => acc + p.price, 0);
     }
   }, [productList]);
+
+  const handleAddQuantity = (data) => {
+    dispatch(increase(data));
+  };
+
+  const handledelQuantity = (data) => {
+    dispatch(decrease(data));
+  };
 
   return (
     <>
@@ -70,67 +78,70 @@ const Shopcart = ({ id }) => {
                       {productList?.map((data, id) => {
                         //             console.log(data);
                         return (
-                          <thead>
-                            <div className="row-1">
-                              <tr key={id} className="alert">
-                                <td className="product-item-img">
-                                  <img src={data.image} alt="" />
-                                </td>
-                                <td className="product-item-name">
-                                  {data.name}
-                                </td>
-                                <td className="product-item-price">
-                                  Rs{data.price}
-                                </td>
+                          <tr key={id} className="alert">
+                            <td className="product-item-img">
+                              <img src={data.image} alt="" />
+                            </td>
+                            <td className="product-item-name">{data.name}</td>
+                            <td className="product-item-price">
+                              Rs{data.price}
+                            </td>
 
-                                <td className="product-item-quantity">
-                                  <div className="quantity btn-quantity max-w80">
-                                    <Form>
-                                      <Form.Group controlId="exampleForm.SelectCustom">
-                                        <Form.Control
-                                          as="select"
-                                          custom
-                                          value={data.qty}
-                                          onChange={(e) => {
-                                            //			dispatch(increase(id))}>
-                                            console.log(e.target.value);
-                                            dispatch(
-                                              updateCartUnits(
-                                                data,
-                                                e.target.value
-                                              )
-                                            );
-                                          }}
-                                        >
-                                          <option value="1">1</option>
-                                          <option value="2">2</option>
-                                          <option value="3">3</option>
-                                          <option value="4">4</option>
-                                          <option value="5">5</option>
-                                        </Form.Control>
-                                      </Form.Group>
-                                    </Form>
-                                  </div>
-                                </td>
+                            <td className="product-item-quantity">
+                              <div className="quantity btn-quantity max-w80">
+                                <button
+                                  className="fast"
+                                  onClick={() => handleAddQuantity(data)}
+                                >
+                                  -
+                                </button>
+                                <span></span>
+                                <button
+                                  className="fast"
+                                  onClick={() => handledelQuantity(data)}
+                                >
+                                  +
+                                </button>
+                                {/*} <Form>
+                                  <Form.Group controlId="exampleForm.SelectCustom">
+                                    <Form.Control
+                                      as="select"
+                                      custom
+                                      value={data.qty}
+                                      onChange={(e) => {
+                                        //			dispatch(increase(id))}>
+                                        console.log(e.target.value);
+                                        dispatch(
+                                          increase(data, e.target.value)
+                                        );
+                                      }}
+                                    >
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                    </Form.Control>
+                                  </Form.Group>
+                                </Form>
+                                */}
+                              </div>
+                            </td>
 
-                                <td className="product-item-totle">
-                                  Rs
-                                  {parseInt(data.offer_price) *
-                                    parseInt(data.qty)}
-                                </td>
-                                <td className="product-item-close">
-                                  <button
-                                    onClick={() =>
-                                      dispatch(removeFromCart(data.id))
-                                    }
-                                    data-dismiss="alert"
-                                    aria-label="close"
-                                    className="ti-close"
-                                  ></button>
-                                </td>
-                              </tr>
-                            </div>
-                          </thead>
+                            <td className="product-item-totle">
+                              Rs {data.price}
+                            </td>
+                            <td className="product-item-close">
+                              <button
+                                onClick={() =>
+                                  dispatch(removeFromCart(data.id))
+                                }
+                                data-dismiss="alert"
+                                aria-label="close"
+                                className="ti-close"
+                              ></button>
+                            </td>
+                          </tr>
                         );
                       })}
                     </tbody>

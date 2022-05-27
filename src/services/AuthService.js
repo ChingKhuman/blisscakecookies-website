@@ -2,10 +2,12 @@ import axios from "axios";
 import { loginAction, logoutAction } from "../redux/action/Authaction";
 import { LOGOUT } from "../redux/actionType";
 
-export function signUp(email, password) {
+export function signUp(email, password, user_name, mobile) {
   const data = {
     email,
     password,
+    user_name,
+    mobile,
     token: true,
   };
   return axios.post("http://172.105.36.218:8011/api/register/", data);
