@@ -12,15 +12,15 @@ export  function signupAction(email, password,user_name, mobile, history) {
     return (dispatch) => {
         signUp(email, password, user_name, mobile).then((response) => {
             saveTokenInLocalStorage(response.data);
-   //         console.log(response);
+           console.log(response);
           runLogoutTimer(dispatch, response.data.expiresIn * 10000);
             dispatch(signUpConfirmedAction(response.data));
-            history.push('/shop-checkout')
+            history.push('/login')
         })
                 .catch((error) => {
                     const errorMessage = formatError(error.response.data);
                     dispatch(signupFailedAction(errorMessage));
-  //          console.log(error.response)
+        //  console.log(error.response)
         })
     };
 }
@@ -32,7 +32,7 @@ export function loginAction(email, password, history) {
             saveTokenInLocalStorage(response.data);
             runLogoutTimer(dispatch, response.data.expiresIn * 1000); 
            dispatch(loginConfirmedAction(response.data));
-           history.push('/shop-checkout')
+        //   history.push('/shop-checkout')
         })
         .catch((error) => {
             const errorMessage = formatError(error.response.data);
@@ -54,7 +54,7 @@ export function loginConfirmedAction(data) {
     }
 }
 
-export function logoutAction(history) {
+export function logout(history) {
     localStorage.removeItem('userDetails');
  //   history.push('/login')
     return {
@@ -71,7 +71,7 @@ return {
 }
 export function signupFailedAction(message) {
     return {
-        type: SIGNUP_FAILED_ACTION,
+        type: 'SIGNUP_FAILED_ACTION',
         payload: message,
     };
 }

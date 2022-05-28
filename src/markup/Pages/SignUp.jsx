@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { Display } from "react-bootstrap-icons";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { signupAction } from "../../redux/action/Authaction";
@@ -38,16 +40,18 @@ function SignUp(props) {
             dispatch(signupAction(email, password,user_name, mobile,  props.history));
         }
     return (
-        <>
-      <Header/>
+
+    
+
+        
+     
       <div className="flex justify-center"
                 style={{ textAlign: "center" }} >
+                    <Header/>
             <div className='w-1/3 shadow p-3 border border-grey-400'>
                 <h1 className="text-1x1 font-extrabold">Sign Up</h1>
                 <hr/>
-                <h3 className="text-2x1">Sign Up currently not available
-                Select Login option with "admin@gmail.com" and "admin"
-                as a login and password</h3>
+              
 
                 {props.errorMessage && (
                     <div className="bg-red-300 text-red-900 border border-red-900">
@@ -59,69 +63,53 @@ function SignUp(props) {
                         {props.successMessage}
                         </div>
                 )}
-                <form onSubmit={onSignUp}>
-                <div className='container' style={{fontSize:"20px"}}>
-                        <label>Username</label>
-                        <div>
-                            <input
-                            type="text"
-                            className="border border-grey-300 p-1 w-full"
-                            value={user_name} 
-                            onChange={(e) => setUser_Name(e.target.value)}
-                            />
-                            
-                        </div>
-                        {errors.user_name && <div>{errors.user_name}</div>}
-                    </div>
-                    <div className='container' style={{fontSize:"20px"}}>
-                        <label>Email</label>
-                        <div>
-                            <input
-                            type="text"
-                            className="border border-grey-300 p-1 w-full"
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)}
-                            />                            
-                        </div>
-                        {errors.email && <div>{errors.email}</div>}
-                    </div>
-                    <div className='container' style={{fontSize:"20px"}}>
-                        <label>Password</label>
-                        <div>
-                            <input
-                            type="password"
-                            className="border border-grey-300 p-1 w-full"
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div>
-                        {errors.password && <div>{errors.password}</div>}
-                    </div>
-                    <div>
-                    <div className='container' style={{fontSize:"20px"}}>
-                        <label>Mobile</label>
-                            <input
-                            type="mobile"
-                            className="border border-grey-300 p-1 w-full"
-                            value={mobile} 
-                            onChange={(e) => setMobile(e.target.value)}
-                            />
-                        </div>
 
-                        {errors.mobile && <div>{errors.mobile}</div>}
-                        </div>
-                    <div className='col-lg-12'>
-                    <button
-                    type="submit" className="btn btnhover">Sign up</button>
-                    <Link to={"/Login"}>
-                    <button
-                    type="submit" className="btn btnhover">Go to Login</button>
-                    </Link>
-                    </div>
-                </form>
-            </div>
+<div>
+        <Form onSubmit={onSignUp}>
+
+        <Form.Group className="mb-1 w-25 p-3 mx-auto" controlId="formBasicEmail">
+    <Form.Label>Username</Form.Label>
+    <Form.Control type="email" placeholder="Username"  value={user_name} 
+                            onChange={(e) => setUser_Name(e.target.value)}/>
+                            {errors.user_name && <div>{errors.user_name}</div>}
+    <Form.Text className="text-muted">
+      
+    </Form.Text>
+  </Form.Group>
+  <Form.Group className="mb-1 w-25 p-3 mx-auto" controlId="formBasicEmail">
+    <Form.Label>Email address</Form.Label>
+    <Form.Control type="email" placeholder="Enter email"  value={email} 
+                            onChange={(e) => setEmail(e.target.value)}/>
+   {errors.email && <div>{errors.email}</div>}
+  </Form.Group>
+
+  <Form.Group className="mb-1 w-25 p-3 mx-auto" controlId="formBasicPassword">
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" placeholder="Password" value={password} 
+                            onChange={(e) => setPassword(e.target.value)}  />
+
+{errors.password && <div>{errors.password}</div>}
+  </Form.Group>
+  
+  <Form.Group className="mb-1 w-25 p-3 mx-auto" >
+    <Form.Label>Mobile</Form.Label>
+    <Form.Control type="email" placeholder="Mobile"   value={mobile} 
+                            onChange={(e) => setMobile(e.target.value)}/>
+    {errors.mobile && <div>{errors.mobile}</div>}
+   
+  </Form.Group>  
+
+
+  <Button variant="primary mr-5" type="submit">
+    Sign In
+  </Button>
+  <Button variant="primary" type="submit" href="/login">
+    Login
+  </Button>
+</Form></div>
+                            </div>
         </div>
-        </>
+        
     )
 }
 const mapStateToProps = (state) => {

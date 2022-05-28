@@ -1,5 +1,10 @@
 import axios from "axios";
-import { loginAction, logoutAction } from "../redux/action/Authaction";
+import {
+  loginAction,
+  loginConfirmedAction,
+  logout,
+  logoutAction,
+} from "../redux/action/Authaction";
 import { LOGOUT } from "../redux/actionType";
 
 export function signUp(email, password, user_name, mobile) {
@@ -40,23 +45,24 @@ export function formatError(errorResponse) {
 }
 
 export function saveTokenInLocalStorage(tokenDetails) {
+  tokenDetails.expireDate = new Date(
+    new Date().getTime() + tokenDetails.expiresIn * 10000
+  );
   localStorage.setItem("userDetails", JSON.stringify(tokenDetails));
 }
 
 export function runLogoutTimer(dispatch, timer) {
   setTimeout(() => {
-    dispatch(logoutAction());
+    dispatch(logout());
     //  console.log(setTimeout)
-  }, 10000);
+  }, 100000);
 }
 
-{
-  /*}
 export function checkAutoLogin(dispatch, history) {
   const tokenDetailsString = localStorage.getItem("userDetails");
   let tokenDetails = "";
   if (!tokenDetailsString) {
-    dispatch(logoutAction(history));
+    dispatch(logout(history));
     return;
   }
 
@@ -65,14 +71,11 @@ export function checkAutoLogin(dispatch, history) {
   let todaysDate = new Date();
 
   if (todaysDate > expireDate) {
-    dispatch(logoutAction(history));
+    dispatch(logout(history));
     return;
   }
-  // dispatch(loginConfiremedAction(tokenDetails));
+  dispatch(loginConfirmedAction(tokenDetails));
 
   const timer = expireDate.getTime() - todaysDate.getTime();
   runLogoutTimer(dispatch, timer);
-}
-
-*/
 }

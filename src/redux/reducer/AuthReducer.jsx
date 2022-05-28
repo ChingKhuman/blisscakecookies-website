@@ -31,26 +31,15 @@ export function AuthReducer(state = initialState, action) {
     }
 
     if (action.type === SIGNUP_FAILED_ACTION) {
+      switch(action.type){
+      case 'SIGNUP_FAILED_ACTION':
       return {
         ...state,
         errorMessage: action.payload,
       };
     }
-   
-   
-    if (action.type === LOGOUT_ACTION) {
-      return {
-        ...state,
-        auth: {
-          email: '',    
-          password: '',
-          localId: '',
-          expiresIn: '',
-          idToken: '',
-          token: '',
-        },
-      };
     }
+   
 
   if (action.type === LOGIN_CONFIRMED_ACTION) {
     return {
@@ -75,6 +64,21 @@ export function AuthReducer(state = initialState, action) {
     
     };
     }
+       
+    if (action.type === LOGOUT_ACTION) {
+      return {
+        ...state,
+        auth: {
+          email: '',    
+          password: '',
+          localId: '',
+          expiresIn: '',
+          idToken: '',
+          token: '',
+        },
+      };
+    }
+
 
     return state;
   }

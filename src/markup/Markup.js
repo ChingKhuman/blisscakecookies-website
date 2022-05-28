@@ -51,14 +51,10 @@ import OrderPlace from "./Pages/OrderPlace";
 import Successfullpage from "./Pages/Successfullpage";
 
 function Markup(props) {
-  {
-    /*}
   const dispatch = useDispatch();
   useEffect(() => {
     checkAutoLogin(dispatch, props.history);
   }, []);
-*/
-  }
 
   return (
     <BrowserRouter basename="/app">

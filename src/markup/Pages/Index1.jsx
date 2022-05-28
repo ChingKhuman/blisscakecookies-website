@@ -7,7 +7,7 @@ import Slider from "../Element/Slider";
 import Tab from "./Tab";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import ProductService from "../../redux/services/ProductService";
+
 
 //Images
 var img1 = require("./../../images/background/bg5.jpg");

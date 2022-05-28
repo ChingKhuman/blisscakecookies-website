@@ -73,36 +73,36 @@ const Shopcart = ({ id }) => {
                         <th>Close</th>
                       </tr>
                     </thead>
+                    <>
+                      <tbody>
+                        {productList?.map((data, id) => {
+                          //             console.log(data);
+                          return (
+                            <tr key={id} className="alert">
+                              <td className="product-item-img">
+                                <img src={data.image} alt="" />
+                              </td>
+                              <td className="product-item-name">{data.name}</td>
+                              <td className="product-item-price">
+                                Rs{data.price}
+                              </td>
 
-                    <tbody>
-                      {productList?.map((data, id) => {
-                        //             console.log(data);
-                        return (
-                          <tr key={id} className="alert">
-                            <td className="product-item-img">
-                              <img src={data.image} alt="" />
-                            </td>
-                            <td className="product-item-name">{data.name}</td>
-                            <td className="product-item-price">
-                              Rs{data.price}
-                            </td>
-
-                            <td className="product-item-quantity">
-                              <div className="quantity btn-quantity max-w80">
-                                <button
-                                  className="fast"
-                                  onClick={() => handleAddQuantity(data)}
-                                >
-                                  -
-                                </button>
-                                <span></span>
-                                <button
-                                  className="fast"
-                                  onClick={() => handledelQuantity(data)}
-                                >
-                                  +
-                                </button>
-                                {/*} <Form>
+                              <td className="product-item-quantity">
+                                <div className="quantity btn-quantity max-w80">
+                                  <button
+                                    className="fast"
+                                    onClick={() => handleAddQuantity(data)}
+                                  >
+                                    -
+                                  </button>
+                                  <span></span>
+                                  <button
+                                    className="fast"
+                                    onClick={() => handledelQuantity(data)}
+                                  >
+                                    +
+                                  </button>
+                                  {/*} <Form>
                                   <Form.Group controlId="exampleForm.SelectCustom">
                                     <Form.Control
                                       as="select"
@@ -125,28 +125,28 @@ const Shopcart = ({ id }) => {
                                   </Form.Group>
                                 </Form>
                                 */}
-                              </div>
-                            </td>
+                                </div>
+                              </td>
 
-                            <td className="product-item-totle">
-                              Rs {data.price}
-                            </td>
-                            <td className="product-item-close">
-                              <button
-                                onClick={() =>
-                                  dispatch(removeFromCart(data.id))
-                                }
-                                data-dismiss="alert"
-                                aria-label="close"
-                                className="ti-close"
-                              ></button>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
+                              <td className="product-item-totle">
+                                Rs {data.price}
+                              </td>
+                              <td className="product-item-close">
+                                <button
+                                  onClick={() =>
+                                    dispatch(removeFromCart(data.id))
+                                  }
+                                  data-dismiss="alert"
+                                  aria-label="close"
+                                  className="ti-close"
+                                ></button>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </>
                     <div>
-                      {" "}
                       <button
                         color="danger"
                         onClick={() => dispatch(clearItems())}

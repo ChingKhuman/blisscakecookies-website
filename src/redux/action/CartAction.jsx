@@ -1,5 +1,5 @@
 import { ADD_TO_CART, REMOVE_FROM_CART, CART_RESET, GET_TOTALS, INCREASE, DECREASE, CLEAR_ITEMS, UPDATE_CART_UNITS } from "../actionType"; 
-import axios from "../../helper/Constant";
+
 import * as actionTypes from "../actionType"
 
 

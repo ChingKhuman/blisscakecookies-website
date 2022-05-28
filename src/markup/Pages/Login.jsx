@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Button, Form } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { loginAction } from '../../redux/action/Authaction';
@@ -36,6 +37,8 @@ function Login(props) {
   return (
     <>
       <Header/>
+
+    
         <div className="flex justify-center" 
                 style={{ textAlign: "center"  }} >
             <div className="p-a30 bg-gray clearfix radius-sm "
@@ -52,41 +55,35 @@ function Login(props) {
                         </div>
                 )}
 
+<Form onSubmit={onLogin}>
+  <Form.Group className="mb-3 w-25 p-3 mx-auto"  controlId="formBasicEmail">
+    <Form.Label>Email address</Form.Label>
+    <Form.Control type="email" placeholder="Enter email"  value={email} 
+                            onChange={(e) => setEmail(e.target.value)} />
+                             {errors.email && <div>{errors.email}</div>}
+    <Form.Text className="text-muted">
+      We'll never share your email with anyone else.
+    </Form.Text>
+  </Form.Group>
+
+  <Form.Group className="mb-3 w-25 p-3 mx-auto" controlId="formBasicPassword">
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" placeholder="Password" value={password} 
+                            onChange={(e) => setPassword(e.target.value)} />
+                              {errors.password && <div>{errors.password}</div>}
+  </Form.Group>
+  <Form.Group className="mb-3" controlId="formBasicCheckbox">
+    <Form.Check type="checkbox"  />
+  </Form.Group>
+  <Button variant="primary mr-5" type="submit">
+    Login
+  </Button>
+  <Button variant="primary" type="submit" href="/signup">
+    Sign up
+  </Button>
+</Form>
                 
-                <form onSubmit={onLogin}>
-                    <div  className='container' style={{fontSize:"30px"}}>
-                        <label>Email</label>
-                        <div>
-                            <input
-                            type="text"
-                            className="border border-grey-300 p-1 w-full"
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)}
-                            />
-                            
-                        </div>
-                        {errors.email && <div>{errors.email}</div>}
-                    </div>
-                    <div  className='container' style={{fontSize:"30px"}}>
-                        <label>Password</label>
-                        <div>
-                            <input
-                            type="password"
-                            className="border border-black-300 p-1 w-full"
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div>
-                        {errors.password && <div>{errors.password}</div>}
-                    </div>
-                    <div className='col-lg-12'>
-                    <button
-                    type="submit" className="btn btnhover">Login</button>
-                     
-                    </div>
-                   
-                    
-                </form>
+                
             </div>
         </div>
         </>

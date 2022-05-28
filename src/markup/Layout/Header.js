@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../../redux/selectors/AuthSelector";
 import { connect } from "react-redux";
-import { logoutAction } from "../../redux/action/Authaction";
+import { logout, logoutAction } from "../../redux/action/Authaction";
 
 function Header(props) {
   function onLogout(e) {
     e.preventDefault();
-    dispatch(logoutAction());
+    dispatch(logout());
   }
 
   const dispatch = useDispatch();
